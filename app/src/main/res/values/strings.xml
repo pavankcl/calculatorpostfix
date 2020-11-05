@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MY_CALCULATOR(PFA)</string>
+    <string name="phone_hint">enter</string>
+    <string-array name="spinner_items">
+      <item>Basic mode</item>
+        <item>Scientific mode</item>
+        <item>Advancrd mode</item>
+    </string-array>
+</resources>
