@@ -1,28 +1,38 @@
 package com.example.my_calculatorpfa;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+//import android.view.View;
 import android.view.View;
 import android.widget.AdapterView;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
+//import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity   {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
+
     Button buttonadd, buttonsub, buttonmul, buttondiv;
     EditText EditText;
-    float mValueOne, mValueTwo;
+    private TextView screen;
+    private String display;
+   // float mValueOne, mValueTwo;
+   {
+       display = " ";
+   }
 
-    boolean Addition, mSubtract, Multiplication, Division;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Spinner spinner1 = findViewById(R.id.spinner1);
-        spinner1.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        spinner1.setOnItemSelectedListener( this);
 
 
         buttonadd = (Button) findViewById(R.id.buttonadd);
@@ -30,11 +40,15 @@ public class MainActivity extends AppCompatActivity   {
         buttonmul = (Button) findViewById(R.id.buttonmul);
         buttondiv = (Button) findViewById(R.id.buttondiv);
 
+        screen = (TextView) findViewById(R.id.textView);
+        screen.setText(display);
+
         buttonadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText.setText(EditText.getText() + "+");
-            }
+                    EditText.setText(EditText.getText() + "+");
+                }
+
         });
 
         buttonsub.setOnClickListener(new View.OnClickListener() {
@@ -62,5 +76,13 @@ public class MainActivity extends AppCompatActivity   {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

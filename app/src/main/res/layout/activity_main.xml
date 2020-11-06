@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
 
-    tools:context=".MainActivity">
+
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
 
 
@@ -16,55 +18,70 @@
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:outlineSpotShadowColor="#FF9800"
+        android:entries="@array/spinner_items"
+        android:background="@color/green"/>
 
-        android:entries="@array/spinner_items"/>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp" />
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/saffron"
+
+        android:hint="History" />
+
 
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/blue"
         android:hint="@string/phone_hint"
         android:inputType="phone" />
 
-    <Button
-        android:id="@+id/buttonadd"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+" />
+        android:orientation="vertical"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="50dp">
 
-    <Button
-        android:id="@+id/buttonsub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-" />
+        <Button
+            android:id="@+id/buttonadd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:text="+" />
 
-    <Button
-        android:id="@+id/buttonmul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*" />
+        <Button
+            android:id="@+id/buttonsub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="-35dp"
+            android:text="-" />
 
-    <Button
+        <Button
+            android:id="@+id/buttonmul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="-35dp"
+            android:text="*" />
+
+        <Button
         android:id="@+id/buttondiv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/" />
+        android:text="/"
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="-35dp"/>
+    </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 
 
 </LinearLayout>

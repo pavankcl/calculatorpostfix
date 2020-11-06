@@ -4,6 +4,6 @@
     <string-array name="spinner_items">
       <item>Basic mode</item>
         <item>Scientific mode</item>
-        <item>Advancrd mode</item>
+        <item>Advanced mode</item>
     </string-array>
 </resources>
