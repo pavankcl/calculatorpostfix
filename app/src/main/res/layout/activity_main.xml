@@ -43,8 +43,8 @@
         android:layout_marginTop="25dp"
         android:background="@color/blue"
         android:hint="@string/phone_hint"
-        android:inputType="phone"
-        android:imeOptions="actionSend"/>
+
+        android:inputType="numberDecimal"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

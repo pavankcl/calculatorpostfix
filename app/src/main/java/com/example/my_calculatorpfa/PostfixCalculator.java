@@ -60,7 +60,7 @@ public class PostfixCalculator {
                     double element = Double.parseDouble(currentElement);
                     stack.push(element);
                 } catch (NumberFormatException e) {
-                    /*TODO Nothing here!*/
+
                 }
             }
         }

@@ -1,6 +1,8 @@
 package com.example.my_calculatorpfa;
 
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,13 +23,15 @@ import android.os.Bundle;
 //import android.view.View;
 //import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText screen;
     private String display;
     private String currentOperator;
     private PostfixCalculator calculator;
     private PostfixConverter converter;
     private String displayCopy;
+    Button buttonadd, buttonsub, buttonmul, buttondiv;
+    float mValueOne, mValueTwo;
 
 
     // INIT ALL VALUES:
@@ -45,13 +49,96 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Spinner spinner1 = findViewById(R.id.spinner1);
-        spinner1.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        spinner1.setOnItemSelectedListener(this);
 
+        buttonadd = (Button) findViewById(R.id.buttonadd);
+        buttonsub = (Button) findViewById(R.id.buttonsub);
+        buttonmul = (Button) findViewById(R.id.buttonmul);
+        buttondiv = (Button) findViewById(R.id.buttondiv);
+        buttonadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (screen == null) {
+                    screen.setText("");
+                } else {
+                    mValueOne = Float.parseFloat(screen.getText() + "");
+                    //Addition = true;
+                    screen.setText(null);
+                }
+            }
+        });
+
+        buttonsub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mValueOne = Float.parseFloat(screen.getText() + "");
+                //mSubtract = true;
+                screen.setText(null);
+            }
+        });
+
+        buttonmul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mValueOne = Float.parseFloat(screen.getText() + "");
+                //Multiplication = true;
+                screen.setText(null);
+            }
+        });
+
+        buttondiv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mValueOne = Float.parseFloat(screen.getText() + "");
+                //Division = true;
+                screen.setText(null);
+            }
+           // @Override
+            public void pavan(View v){
+
+            }
+        });
 
 
         // Init
-        screen = (EditText) findViewById(R.id.phone);
-        screen.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+        screen =  findViewById(R.id.phone);
+       /* screen.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        };*/
+
+        //screen.setText(display);
+      /*  screen.setOnKeyListener(new NumberKeyListener() {
+            //@Override
+            public int getInputType() {
+                return InputType.TYPE_CLASS_NUMBER;
+            }
+
+            // @Override
+            public boolean onKeyDown(View view, int keyCode, KeyEvent event) {
+                if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
+
+                    // Log.d(LOG_TAG, "onKeyDown()");
+                    //return super.onKeyDown(keyCode, event);
+                } else if (keyCode == KeyEvent.KEYCODE_DEL) {
+                    Log.i("DEBUG", "delete key hit");
+
+                }
+                Log.i("DEBUG", "key was pressed");
+                //  update();
+                return true;
+            }
+
+            @Override
+            protected char[] getAcceptedChars() {
+                return new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+            }
+        });
+         /*screen.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
@@ -61,9 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return handled;
             }
-        });
-        screen.setText(display);
-
+        });*/
     }
 
 
@@ -163,4 +248,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
