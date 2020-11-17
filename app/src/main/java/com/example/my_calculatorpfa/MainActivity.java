@@ -94,23 +94,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //Division = true;
                 screen.setText(null);
             }
-           // @Override
-            public void pavan(View v){
+            //@Override
 
-            }
         });
 
 
         // Init
 
-        screen =  findViewById(R.id.phone);
-       /* screen.setOnKeyListener(new View.OnKeyListener(){
+        // screen =  findViewById(R.id.phone);
+        screen = (EditText) findViewById(R.id.phone);
+        screen.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v){
-
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    screen.requestFocus();
+                    return true;
+                } else
+                    return false;
             }
-        };*/
-
+        });
+    }
         //screen.setText(display);
       /*  screen.setOnKeyListener(new NumberKeyListener() {
             //@Override
@@ -149,112 +152,111 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return handled;
             }
         });*/
-    }
 
 
-    private void updateScreen() {
-        screen.setText(display);
-    }
+        private void updateScreen () {
+            screen.setText(display);
+        }
 
-    ArrayList<String> list = new ArrayList<>();
-    String tmpNumber = "";
+        ArrayList<String> list = new ArrayList<>();
+        String tmpNumber = "";
 
-    // If user push one of the numbers button
-    public void onEditorAction(View v) {
-        Button b = (Button) v;
-        display += b.getText();
-        displayCopy += display;
-        updateScreen();
-        flag = false;
-
-        if (first) {
-            first = false;
-            tmpNumber += firstOperator + b.getText();
-            firstOperator = "";
-        } else tmpNumber += b.getText();
-    }
-
-
-    private boolean flag = false;
-    private boolean first = true;
-    private String firstOperator = "";
-
-
-    // If user push +/-/÷/×
-    public void onClickOperator(View v) {
-        Button b = (Button) v;
-        list.add(tmpNumber);
-        tmpNumber = "";
-
-        if (flag) {
-            currentOperator = (String) b.getText();
-            display = display.substring(0, display.length() - 1) + currentOperator;
-            list.set(list.size() - 2, currentOperator);
-            updateScreen();
-        } else {
+        // If user push one of the numbers button
+        public void onEditorAction (View v){
+            Button b = (Button) v;
             display += b.getText();
             displayCopy += display;
-            flag = true;
-            list.add((String) b.getText());
+            updateScreen();
+            flag = false;
+
+            if (first) {
+                first = false;
+                tmpNumber += firstOperator + b.getText();
+                firstOperator = "";
+            } else tmpNumber += b.getText();
+        }
+
+
+        private boolean flag = false;
+        private boolean first = true;
+        private String firstOperator = "";
+
+
+        // If user push +/-/÷/×
+        public void onClickOperator (View v){
+            Button b = (Button) v;
+            list.add(tmpNumber);
+            tmpNumber = "";
+
+            if (flag) {
+                currentOperator = (String) b.getText();
+                display = display.substring(0, display.length() - 1) + currentOperator;
+                list.set(list.size() - 2, currentOperator);
+                updateScreen();
+            } else {
+                display += b.getText();
+                displayCopy += display;
+                flag = true;
+                list.add((String) b.getText());
+                updateScreen();
+            }
+
+            if (b.getText().equals("-") && first) {
+                firstOperator = b.getText().toString();
+            }
+        }
+
+
+        public void onClickEqual (View v){
+            list.add(tmpNumber);
+            tmpNumber = "";
+
+            String tmp = "";
+            for (String element : list) {
+                Toast.makeText(getApplicationContext(), element, Toast.LENGTH_SHORT).show();
+                tmp += element + " ";
+            }
+            Toast.makeText(getApplicationContext(), tmp, Toast.LENGTH_SHORT).show();
+            display = tmp;
+
+            Log.d("DEB", display);
+
+            // Transform notation to postfix
+            converter = new PostfixConverter(tmp);
+            // Get this postfix notation
+            String postfixNotation = converter.getPostfix();
+            display = postfixNotation;
+            // Calculate via postfix
+            calculator.startCalculate(postfixNotation);
+            // Show result on screen
+            display = Double.toString(calculator.getResult());
             updateScreen();
         }
 
-        if (b.getText().equals("-") && first) {
-            firstOperator = b.getText().toString();
+
+        // If user push `C` (clear) button
+        public void onClickClear (View v){
+            clear(); // Clear display and operators
         }
-    }
 
 
-
-    public void onClickEqual(View v) {
-        list.add(tmpNumber);
-        tmpNumber = "";
-
-        String tmp = "";
-        for (String element : list) {
-            Toast.makeText(getApplicationContext(), element, Toast.LENGTH_SHORT).show();
-            tmp += element + " ";
+        private void clear () {
+            display = "";
+            currentOperator = "";
+            list.clear();
+            tmpNumber = "";
+            updateScreen();
         }
-        Toast.makeText(getApplicationContext(), tmp, Toast.LENGTH_SHORT).show();
-        display = tmp;
-
-        Log.d("DEB", display);
-
-        // Transform notation to postfix
-        converter = new PostfixConverter(tmp);
-        // Get this postfix notation
-        String postfixNotation = converter.getPostfix();
-        display = postfixNotation;
-        // Calculate via postfix
-        calculator.startCalculate(postfixNotation);
-        // Show result on screen
-        display = Double.toString(calculator.getResult());
-        updateScreen();
-    }
 
 
-    // If user push `C` (clear) button
-    public void onClickClear(View v) {
-        clear(); // Clear display and operators
-    }
+        @Override
+        public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
 
+        }
 
-    private void clear() {
-        display = "";
-        currentOperator = "";
-        list.clear();
-        tmpNumber = "";
-        updateScreen();
-    }
+        @Override
+        public void onNothingSelected (AdapterView < ? > parent){
 
+        }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
