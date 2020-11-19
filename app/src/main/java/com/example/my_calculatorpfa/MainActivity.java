@@ -1,11 +1,14 @@
 package com.example.my_calculatorpfa;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//import java.lang.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private String displayCopy;
     Button buttonadd, buttonsub, buttonmul, buttondiv;
     float mValueOne, mValueTwo;
+    private static String tag ="pavan";
 
 
     // INIT ALL VALUES:
@@ -101,9 +105,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // Init
 
-        // screen =  findViewById(R.id.phone);
-        screen = (EditText) findViewById(R.id.phone);
-        screen.setOnKeyListener(new View.OnKeyListener() {
+        screen =  findViewById(R.id.phone);
+        screen.setText(display);
+
+        screen.addTextChangedListener(new TextWatcher(){
+
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.i(tag, "s: " + s + " start: " + start +" count: " + count +" after: "+ after);
+
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i(tag, "s: " + s + " start: " + start +" count: " + count );
+                screen.setText(" c");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.i(tag, "s: " + s );
+            }
+        });
+       /* screen.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((keyCode == KeyEvent.KEYCODE_ENTER)) {
@@ -112,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 } else
                     return false;
             }
-        });
+        });*/
     }
         //screen.setText(display);
       /*  screen.setOnKeyListener(new NumberKeyListener() {
@@ -162,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String tmpNumber = "";
 
         // If user push one of the numbers button
-        public void onEditorAction (View v){
+        public void onEditorAction(View v){
             Button b = (Button) v;
             display += b.getText();
             displayCopy += display;
