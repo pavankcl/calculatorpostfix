@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.i(tag, "s: " + s + " start: " + start +" count: " + count );
-                screen.setText(" c");
+                
             }
 
             @Override
