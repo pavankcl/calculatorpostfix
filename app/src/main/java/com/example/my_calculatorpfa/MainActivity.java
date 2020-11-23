@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private EditText screen;
     private String display;
     private String currentOperator;
-    private PostfixCalculator calculator;
-    private PostfixConverter converter;
+    //private PostfixCalculator calculator;
+    //private PostfixConverter converter;
     private String displayCopy;
     Button buttonadd, buttonsub, buttonmul, buttondiv;
     float mValueOne, mValueTwo;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         display = "";
         currentOperator = "";
         //converter = new PostfixConverter();
-        calculator = new PostfixCalculator();
+       // calculator = new PostfixCalculator();
         displayCopy = "";
     }
 
@@ -181,15 +181,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });*/
 
 
-        private void updateScreen () {
+        /*private void updateScreen () {
             screen.setText(display);
-        }
+        }*/
 
         ArrayList<String> list = new ArrayList<>();
         String tmpNumber = "";
 
         // If user push one of the numbers button
-        public void onEditorAction(View v){
+       /* public void onEditorAction(View v){
             Button b = (Button) v;
             display += b.getText();
             displayCopy += display;
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 tmpNumber += firstOperator + b.getText();
                 firstOperator = "";
             } else tmpNumber += b.getText();
-        }
+        }*/
 
 
         private boolean flag = false;
@@ -219,13 +219,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 currentOperator = (String) b.getText();
                 display = display.substring(0, display.length() - 1) + currentOperator;
                 list.set(list.size() - 2, currentOperator);
-                updateScreen();
+                //updateScreen();
             } else {
                 display += b.getText();
                 displayCopy += display;
                 flag = true;
                 list.add((String) b.getText());
-                updateScreen();
+                //updateScreen();
             }
 
             if (b.getText().equals("-") && first) {
@@ -249,20 +249,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.d("DEB", display);
 
             // Transform notation to postfix
-            converter = new PostfixConverter(tmp);
+            //converter = new PostfixConverter(tmp);
             // Get this postfix notation
-            String postfixNotation = converter.getPostfix();
-            display = postfixNotation;
+           // String postfixNotation = converter.getPostfix();
+          //  display = postfixNotation;
             // Calculate via postfix
-            calculator.startCalculate(postfixNotation);
+            //calculator.startCalculate(postfixNotation);
             // Show result on screen
-            display = Double.toString(calculator.getResult());
-            updateScreen();
+            //display = Double.toString(calculator.getResult());
+            //updateScreen();
+            Calculator c = new Calculator(tmp);
         }
 
 
         // If user push `C` (clear) button
-        public void onClickClear (View v){
+       /* public void onClickClear (View v){
             clear(); // Clear display and operators
         }
 
@@ -273,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             list.clear();
             tmpNumber = "";
             updateScreen();
-        }
+        }*/
 
 
         @Override
